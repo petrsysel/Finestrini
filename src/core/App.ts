@@ -34,6 +34,6 @@ class App{
         })
 
         controlPanel.render(this.workspace.getBoardList())
-        board.render(initBoard)
+        // board.render(initBoard)
     }
 }

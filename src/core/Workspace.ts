@@ -52,4 +52,42 @@ class Workspace{
             }
         })
     }
+
+    removeNote(boardId: BoardId, noteId: NoteId){
+        let notes = this.primitive.boards.find(b => b.id == boardId)?.notes
+        if(!notes) return
+        notes = notes.filter(n => n.id != noteId)
+    }
+
+    changeNoteColor(boardId: BoardId, noteId: NoteId, color: NoteColor){
+        let note = this.primitive.boards.find(b => b.id == boardId)?.notes.find(n => n.id == noteId)
+        if(!note) return
+        note.color = color
+    }
+
+    changeNoteContent(boardId: BoardId, noteId: NoteId, content: string){
+        let note = this.primitive.boards.find(b => b.id == boardId)?.notes.find(n => n.id == noteId)
+        if(!note) return
+        note.content = content
+    }
+    
+    changeNotePosition(boardId: BoardId, noteId: NoteId, x: number, y: number){
+        let note = this.primitive.boards.find(b => b.id == boardId)?.notes.find(n => n.id == noteId)
+        if(!note) return
+        note.rect.x = x
+        note.rect.y = y
+    }
+
+    changeNoteSize(boardId: BoardId, noteId: NoteId, width: number, height: number){
+        let note = this.primitive.boards.find(b => b.id == boardId)?.notes.find(n => n.id == noteId)
+        if(!note) return
+        note.rect.width = width
+        note.rect.height = height
+    }
+
+    changeNoteRect(boardId: BoardId, noteId: NoteId, rect: NoteRect){
+        let note = this.primitive.boards.find(b => b.id == boardId)?.notes.find(n => n.id == noteId)
+        if(!note) return
+        note.rect = rect
+    }
 }

@@ -8,12 +8,14 @@ class Workspace{
         }
     }
 
-    createBoard(name: string){
-        this.primitive.boards.push({
+    createBoard(name: string): BoardId{
+        const newBoard = {
             id: crypto.randomUUID(),
             name: name,
             notes: []
-        })
+        }
+        this.primitive.boards.push(newBoard)
+        return newBoard.id
     }
 
     removeBoard(id: BoardId){
@@ -89,5 +91,9 @@ class Workspace{
         let note = this.primitive.boards.find(b => b.id == boardId)?.notes.find(n => n.id == noteId)
         if(!note) return
         note.rect = rect
+    }
+
+    getBoardById(boardId: BoardId){
+        return this.primitive.boards.find(b => b.id == boardId)
     }
 }

@@ -7,5 +7,5 @@ type BoardData = {
 
 interface IBoardUI{
     on(event: BoardEvent, callback: (data: BoardData) => void): void
-    render(board: Board): void
+    render(workspace: WorkspacePrimitive): void
 }

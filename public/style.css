@@ -11,10 +11,13 @@
 }
 body{
     font-family: Verdana, Geneva, Tahoma, sans-serif;
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
 }
 
 .control-panel{
-    position: fixed;
+    /* position:fixed; */
     top: 0;
     left: 0;
     width: 100%;
@@ -25,6 +28,8 @@ body{
     justify-content: space-between;
     align-items: center;
     user-select: none;
+    
+    flex: 1;
 }
 
 .left-bar{
@@ -66,6 +71,7 @@ body{
     min-width: 12rem;
     background-color: var(--dark-main-color);
     /* margin-top: 2.5rem; */
+    z-index: 1000;
 }
 .board-dropdown-content:hover{
     display: block;
@@ -91,8 +97,10 @@ body{
     left: 0;
     width: 100%;
     height: 100%;
-    background-color: var(--transparent)
+    background-color: var(--transparent);
     /* display: none; */
+
+    z-index: 1000;
 }
 .dialogue-window{
     position: fixed;
@@ -103,6 +111,8 @@ body{
     transform: translateX(-50%) translateY(-50%);
     display: flex;
     flex-direction: column;
+
+    
 }
 .small-window{
     width: 20rem;
@@ -145,4 +155,12 @@ body{
 }
 .btn:hover{
     background-color: var(--secondery-color);
+}
+
+#konva-container{
+    /* z-index: -100; */
+    background-color: rgb(226, 241, 237);
+    /* height:200px; */
+    overflow: auto;
+    flex: auto;
 }

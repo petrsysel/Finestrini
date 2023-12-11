@@ -96,4 +96,8 @@ class Workspace{
     getBoardById(boardId: BoardId){
         return this.primitive.boards.find(b => b.id == boardId)
     }
+
+    getPrimitive(){
+        return {...this.primitive}
+    }
 }

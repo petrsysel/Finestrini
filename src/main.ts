@@ -6,7 +6,7 @@ function main(){
     const inputDialogue = new InputDialogue()
     const richTextDialogue = {} as IDialogueUI<string>
     const colorDialogue = {} as IDialogueUI<NoteColor>
-    const board = {} as IBoardUI
+    const board = new KonvaBoard()
 
     const app = new App(
         localStorage,

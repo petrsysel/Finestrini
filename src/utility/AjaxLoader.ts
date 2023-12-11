@@ -1,16 +1,12 @@
 class AjaxLoader {
-    static load(path: string): Promise<string>{
-        return new Promise((resolve, reject) => {
-            const httpRequest = new XMLHttpRequest()
+    static load(path: string): string{
+        const httpRequest = new XMLHttpRequest()
 
-            httpRequest.onload = function(ev){
-                resolve(this.responseText)
-            }
-            httpRequest.onerror = ev => reject()
-            httpRequest.onabort = ev => reject()
-
-            httpRequest.open('GET', path, true)
-            httpRequest.send()
-        })
+        httpRequest.open('GET', path, false)
+        httpRequest.send()
+        if(httpRequest.status === 200){
+            return httpRequest.responseText
+        }
+        else throw new Error(`Request failed: ${httpRequest.statusText}`)
     }
 }

@@ -33,6 +33,7 @@ class App{
         })
         controlPanel.on("change-board-request", data => {
             if(data) this.activeBoardId = data.activeBoard
+            controlPanel.render(this.workspace.getBoardList(), this.activeBoardId)
         })
 
         controlPanel.render(this.workspace.getBoardList(), this.activeBoardId)

@@ -13,6 +13,12 @@ class InputDialogue implements IDialogueUI<string>{
         this.okButtonElement = DOMHelper.get("input-dialogue-ok-btn")
         this.closeButtonElement = DOMHelper.get("input-dialogue-close-btn")
         this.inputElement = DOMHelper.get("dialogue-user-input") as HTMLInputElement
+        this.inputElement.addEventListener("keypress", ev => {
+            if(ev.key === "Enter"){
+                ev.preventDefault()
+                this.okButtonElement.click()
+            }
+        })
 
         this.hide()
     }
@@ -22,6 +28,7 @@ class InputDialogue implements IDialogueUI<string>{
     show(): Promise<string|DialogueCanceled> {
         this.dialogueElement.style.display = "block"
         this.inputElement.value = ""
+        this.inputElement.focus()
         return new Promise((resolve, reject) => {
             this.okButtonElement.addEventListener("click", () => {
                 this.hide()

@@ -2,7 +2,7 @@ function main(){
     const localStorage = {} as IWorkspaceRepository
     const externalStorage = {} as IWorkspaceRepository
     const controlPanel = new ControlPanel()
-    const confirmDialogue = {} as IDialogueUI<boolean>
+    const confirmDialogue = new ConfirmDialogue()
     const inputDialogue = new InputDialogue()
     const richTextDialogue = {} as IDialogueUI<string>
     const colorDialogue = {} as IDialogueUI<NoteColor>

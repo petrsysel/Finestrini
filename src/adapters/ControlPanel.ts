@@ -6,6 +6,7 @@ class ControlPanel implements IControlPanelUI{
     
     private addBoardBtn: HTMLElement
     private renameBoardBtn: HTMLElement
+    private removeBoardBtn: HTMLElement
 
     constructor(){
         this.eventBehaviour = new EventBehaviour()
@@ -24,6 +25,11 @@ class ControlPanel implements IControlPanelUI{
         this.renameBoardBtn = DOMHelper.get("rename-board-btn")
         this.renameBoardBtn.addEventListener("click", () => {
             this.emit("rename-board-request", null)
+        })
+
+        this.removeBoardBtn = DOMHelper.get("remove-board-btn")
+        this.removeBoardBtn.addEventListener("click", () => {
+            this.emit("remove-board-request", null)
         })
     }
 

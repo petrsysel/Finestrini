@@ -27,10 +27,6 @@ class App{
             this.activeBoardId = this.workspace.createBoard(name)
             controlPanel.render(this.workspace.getBoardList(), this.activeBoardId)
         })
-        controlPanel.on("remove-board-request", data => {
-            this.workspace.removeBoard(this.activeBoardId)
-            this.activeBoardId = this.workspace.getSomeBoard().id
-        })
         controlPanel.on("change-board-request", data => {
             if(data) this.activeBoardId = data.activeBoard
             controlPanel.render(this.workspace.getBoardList(), this.activeBoardId)
@@ -39,6 +35,14 @@ class App{
             const newName = await inputDialogue.show()
             if(newName) this.workspace.renameBoard(this.activeBoardId, newName)
             controlPanel.render(this.workspace.getBoardList(), this.activeBoardId)
+        })
+        controlPanel.on("remove-board-request", async () => {
+            const confirmation = await confirmDialogue.show()
+            if(confirmation){
+                this.workspace.removeBoard(this.activeBoardId)
+                this.activeBoardId = this.workspace.getSomeBoard().id
+                controlPanel.render(this.workspace.getBoardList(), this.activeBoardId)
+            }
         })
 
         controlPanel.render(this.workspace.getBoardList(), this.activeBoardId)

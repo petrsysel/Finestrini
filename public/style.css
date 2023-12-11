@@ -159,8 +159,18 @@ body{
 
 #konva-container{
     /* z-index: -100; */
-    background-color: rgb(226, 241, 237);
-    /* height:200px; */
-    overflow: auto;
-    flex: auto;
+    /* background-color: rgb(226, 241, 237); */
+    height:3000px;
+    /* overflow: auto; */
+    /* flex: auto; */
+
+    background-image: radial-gradient(black 1px, transparent 0);
+    background-size: 40px 40px;
+    background-attachment: scroll;
+}
+
+.add-note-button{
+    position: fixed;
+    right: 2rem;
+    bottom: 2rem;
 }

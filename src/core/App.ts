@@ -45,8 +45,13 @@ class App{
             }
         })
 
+        board.on("add-note-request", () => {
+            this.workspace.createNote(this.activeBoardId, 1, 1)
+            board.render(this.workspace.getBoardById(this.activeBoardId)!, this.workspace.getWidth())
+        })
+
         controlPanel.render(this.workspace.getBoardList(), this.activeBoardId)
-        board.render(this.workspace.getPrimitive())
+        board.render(this.workspace.getBoardById(this.activeBoardId)!, this.workspace.getWidth())
         // board.render(initBoard)
     }
 }

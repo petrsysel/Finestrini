@@ -100,4 +100,7 @@ class Workspace{
     getPrimitive(){
         return {...this.primitive}
     }
+    getWidth(){
+        return this.primitive.width
+    }
 }

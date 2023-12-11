@@ -21,6 +21,7 @@ class InputDialogue implements IDialogueUI<string>{
     }
     show(): Promise<string|DialogueCanceled> {
         this.dialogueElement.style.display = "block"
+        this.inputElement.value = ""
         return new Promise((resolve, reject) => {
             this.okButtonElement.addEventListener("click", () => {
                 this.hide()

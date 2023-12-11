@@ -35,6 +35,11 @@ class App{
             if(data) this.activeBoardId = data.activeBoard
             controlPanel.render(this.workspace.getBoardList(), this.activeBoardId)
         })
+        controlPanel.on("rename-board-request", async () => {
+            const newName = await inputDialogue.show()
+            if(newName) this.workspace.renameBoard(this.activeBoardId, newName)
+            controlPanel.render(this.workspace.getBoardList(), this.activeBoardId)
+        })
 
         controlPanel.render(this.workspace.getBoardList(), this.activeBoardId)
         

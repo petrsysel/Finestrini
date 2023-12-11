@@ -5,6 +5,7 @@ class ControlPanel implements IControlPanelUI{
     private boardDropdownContent: HTMLElement
     
     private addBoardBtn: HTMLElement
+    private renameBoardBtn: HTMLElement
 
     constructor(){
         this.eventBehaviour = new EventBehaviour()
@@ -14,9 +15,15 @@ class ControlPanel implements IControlPanelUI{
         this.element.innerHTML = AjaxLoader.load("templates/ControlPanel.html")
         this.activeBoardLabel = DOMHelper.get("active-board-label")
         this.boardDropdownContent = DOMHelper.get("board-dropdown-content")
+
         this.addBoardBtn = DOMHelper.get("add-board-btn")
         this.addBoardBtn.addEventListener("click", () => {
             this.emit("add-board-request", null)
+        })
+
+        this.renameBoardBtn = DOMHelper.get("rename-board-btn")
+        this.renameBoardBtn.addEventListener("click", () => {
+            this.emit("rename-board-request", null)
         })
     }
 

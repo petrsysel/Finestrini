@@ -30,7 +30,7 @@ class Workspace{
     }
 
     getSomeBoard(){
-        if(this.primitive.boards.length === 0) this.createBoard("Finestrino")
+        if(this.primitive.boards.length === 0) this.createBoard("Finestrini")
         return this.primitive.boards[0]
     }
 

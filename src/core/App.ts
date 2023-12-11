@@ -18,22 +18,25 @@ class App{
 
         controlPanel.on("rename-board-request", async data => {
             const newName = await inputDialogue.show()
-            if(newName.length != 0) this.workspace.renameBoard(this.activeBoardId, newName)
+            if(newName && newName.length != 0) this.workspace.renameBoard(this.activeBoardId, newName)
         })
         controlPanel.on("add-board-request", async data => {
             const name = await inputDialogue.show()
-            if(name.length == 0) return
+            if(!name || name.length == 0) return
+            
             this.activeBoardId = this.workspace.createBoard(name)
+            controlPanel.render(this.workspace.getBoardList(), this.activeBoardId)
         })
         controlPanel.on("remove-board-request", data => {
             this.workspace.removeBoard(this.activeBoardId)
             this.activeBoardId = this.workspace.getSomeBoard().id
         })
         controlPanel.on("change-board-request", data => {
-            this.activeBoardId = data.activeBoard
+            if(data) this.activeBoardId = data.activeBoard
         })
 
-        controlPanel.render(this.workspace.getBoardList())
+        controlPanel.render(this.workspace.getBoardList(), this.activeBoardId)
+        
         // board.render(initBoard)
     }
 }

@@ -1,1 +1,2 @@
-public/libraries/
+node_modules/
+dist/

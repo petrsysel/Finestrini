@@ -1,29 +1,29 @@
-type WorkspacePrimitive = {
+export type WorkspacePrimitive = {
     boards: Board[],
     width: number
 }
 
-type Board = {
+export type Board = {
     id: BoardId,
     name: string,
     notes: Note[]
 }
 
-type NoteRect = {
+export type NoteRect = {
     x: number,
     y: number,
     width: number,
     height: number
 }
 
-type NoteColor = "red" | "green" | "yellow" | "blue" | "purple" | " pink" | "orange"
+export type NoteColor = "red" | "green" | "yellow" | "blue" | "purple" | " pink" | "orange"
 
-type Note = {
+export type Note = {
     id: NoteId,
     content: string,
     color: NoteColor,
     rect: NoteRect
 }
 
-type BoardId = string
-type NoteId = string
+export type BoardId = string
+export type NoteId = string

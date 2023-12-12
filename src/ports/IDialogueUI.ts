@@ -1,7 +1,7 @@
-type DialogueEvent = "data-change"
-type DialogueCanceled = undefined
+export type DialogueEvent = "data-change"
+export type DialogueCanceled = undefined
 
-interface IDialogueUI<T> {
+export interface IDialogueUI<T> {
     on(event: DialogueEvent, callback: (data: T) => void): void
     show(): Promise<T|DialogueCanceled>
 }

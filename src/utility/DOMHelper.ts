@@ -1,4 +1,4 @@
-class DOMHelper{
+export class DOMHelper{
     static get(id: string){
         return document.getElementById(id) as HTMLElement
     }

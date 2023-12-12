@@ -1,4 +1,9 @@
-class ConfirmDialogue implements IDialogueUI<boolean>{
+import { DialogueEvent, IDialogueUI } from "../ports/IDialogueUI"
+import { AjaxLoader } from "../utility/AjaxLoader"
+import { DOMHelper } from "../utility/DOMHelper"
+import { EventBehaviour } from "../utility/EventBehaviour"
+
+export class ConfirmDialogue implements IDialogueUI<boolean>{
     private eventBehaviour: EventBehaviour<DialogueEvent, boolean>
 
     private windowElement: HTMLElement

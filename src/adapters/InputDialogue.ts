@@ -1,4 +1,8 @@
-class InputDialogue implements IDialogueUI<string>{
+import { DialogueCanceled, IDialogueUI } from "../ports/IDialogueUI"
+import { AjaxLoader } from "../utility/AjaxLoader"
+import { DOMHelper } from "../utility/DOMHelper"
+
+export class InputDialogue implements IDialogueUI<string>{
     private dialogueElement: HTMLElement
     private okButtonElement: HTMLElement
     private closeButtonElement: HTMLElement

@@ -1,4 +1,7 @@
-class Workspace{
+import { BoardId, NoteColor, NoteId, NoteRect, WorkspacePrimitive } from "./WorkspaceTypes"
+import { WorkspaceUtility } from "./WorkspaceUtility"
+
+export class Workspace{
     private primitive: WorkspacePrimitive
     
     constructor(){

@@ -1,4 +1,11 @@
-class App{
+import { IBoardUI } from "../ports/IBoardUI"
+import { IControlPanelUI } from "../ports/IControlPanelUI"
+import { IDialogueUI } from "../ports/IDialogueUI"
+import { IWorkspaceRepository } from "../ports/IWorkspaceRepository"
+import { Workspace } from "./Workspace"
+import { BoardId, NoteColor } from "./WorkspaceTypes"
+
+export class App{
     private workspace: Workspace
     private activeBoardId: BoardId
 

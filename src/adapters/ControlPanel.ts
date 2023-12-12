@@ -1,4 +1,10 @@
-class ControlPanel implements IControlPanelUI{
+import { Board, BoardId } from "../core/WorkspaceTypes"
+import { ControlPanelData, ControlPanelEvent, IControlPanelUI } from "../ports/IControlPanelUI"
+import { AjaxLoader } from "../utility/AjaxLoader"
+import { DOMHelper } from "../utility/DOMHelper"
+import { EventBehaviour } from "../utility/EventBehaviour"
+
+export class ControlPanel implements IControlPanelUI{
     private eventBehaviour: EventBehaviour<ControlPanelEvent, ControlPanelData>
     private element: HTMLElement
     private activeBoardLabel: HTMLElement

@@ -1,4 +1,4 @@
-class EventBehaviour<Emits, Provides>{
+export class EventBehaviour<Emits, Provides>{
     private _listeners: {event: Emits, callback: (data:Provides) => void}[]
 
     constructor(){

@@ -1,4 +1,4 @@
-class AjaxLoader {
+export class AjaxLoader {
     static load(path: string): string{
         const httpRequest = new XMLHttpRequest()
 

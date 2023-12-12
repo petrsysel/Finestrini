@@ -1,9 +1,11 @@
-type ShapeColor = {
+import { NoteColor } from "../core/WorkspaceTypes"
+
+export type ShapeColor = {
     color: NoteColor,
     fill: string,
     stroke: string
 }
-class Color{
+export class Color{
     static colors: ShapeColor[] = [
         {
             color: " pink",

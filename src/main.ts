@@ -1,3 +1,12 @@
+import { ConfirmDialogue } from "./adapters/ConfirmDialogue"
+import { ControlPanel } from "./adapters/ControlPanel"
+import { InputDialogue } from "./adapters/InputDialogue"
+import { KonvaBoard } from "./adapters/Konva/KonvaBoard"
+import { App } from "./core/App"
+import { NoteColor } from "./core/WorkspaceTypes"
+import { IDialogueUI } from "./ports/IDialogueUI"
+import { IWorkspaceRepository } from "./ports/IWorkspaceRepository"
+
 function main(){
     const localStorage = {} as IWorkspaceRepository
     const externalStorage = {} as IWorkspaceRepository
@@ -19,3 +28,7 @@ function main(){
         board
     )
 } 
+
+window.addEventListener("load", () => {
+    main()
+})

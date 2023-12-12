@@ -1,11 +1,19 @@
-type KonvaData = {
+import Konva from "konva"
+import { BoardData, BoardEvent, IBoardUI } from "../../ports/IBoardUI"
+import { AjaxLoader } from "../../utility/AjaxLoader"
+import { DOMHelper } from "../../utility/DOMHelper"
+import { EventBehaviour } from "../../utility/EventBehaviour"
+import { Board } from "../../core/WorkspaceTypes"
+import { Color } from "../../utility/Color"
+
+export type KonvaData = {
     space: number,
     widthDots: number,
     cornerRadius: number,
     offset: number
 }
 
-class KonvaBoard implements IBoardUI{
+export class KonvaBoard implements IBoardUI{
     private eventBehaviour: EventBehaviour<BoardEvent, BoardData>
     private boardElement: HTMLElement
     private addNoteElement: HTMLElement

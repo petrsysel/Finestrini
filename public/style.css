@@ -14,6 +14,7 @@ body{
     display: flex;
     flex-direction: column;
     height: 100vh;
+    overflow: hidden;
 }
 
 .control-panel{
@@ -173,4 +174,13 @@ body{
     position: fixed;
     right: 2rem;
     bottom: 2rem;
+}
+
+.board-container{
+    height: 100vh;
+    overflow-y: scroll;
+}
+
+#html-board{
+    height: 3000px;
 }

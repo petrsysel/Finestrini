@@ -59,9 +59,12 @@ export class Workspace{
     }
 
     removeNote(boardId: BoardId, noteId: NoteId){
-        let notes = this.primitive.boards.find(b => b.id == boardId)?.notes
-        if(!notes) return
-        notes = notes.filter(n => n.id != noteId)
+        this.primitive.boards.map(b => {
+            if(b.id === boardId){
+                b.notes = b.notes.filter(n => n.id != noteId)
+            }
+            return b
+        })
     }
 
     changeNoteColor(boardId: BoardId, noteId: NoteId, color: NoteColor){

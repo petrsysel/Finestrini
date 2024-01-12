@@ -76,6 +76,11 @@ export class App{
             this.workspace.changeNoteRect(this.activeBoardId, data.operatingNoteId, data.rect)
             renderBoard()
         })
+        board.on('remove-note-request', data => {
+            if(!data) return
+            this.workspace.removeNote(this.activeBoardId, data.operatingNoteId)
+            renderBoard()
+        })
 
         controlPanel.render(this.workspace.getBoardList(), this.activeBoardId)
         renderBoard()

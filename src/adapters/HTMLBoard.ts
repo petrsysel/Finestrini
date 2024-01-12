@@ -173,6 +173,15 @@ export class HTMLBoard implements IBoardUI {
         controlContainer.appendChild(removeButton)
 
         element.appendChild(controlContainer)
+
+        controlContainer.addEventListener('mouseup', e => {e.stopPropagation()}, false)
+        removeButton.addEventListener('click', e => {
+            const data: BoardData = {
+                operatingNoteId: note.id,
+                rect: note.rect
+            }
+            this.emit('remove-note-request', data)
+        })
     }
 
     private getTileWidth(boardWidth: number){

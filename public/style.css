@@ -237,3 +237,21 @@ body{
     width: 100%;
     height: 100%;
 }
+
+.note-controls-container{
+    opacity: 0;
+    transition: opacity 0.2s;
+    display: flex;
+    flex-direction: column;
+    position: absolute;
+    right: -30px;
+    top: 0;
+}
+.note:hover .note-controls-container{
+    opacity: 1;
+}
+.note-controls-container img{
+    width: 20px;
+    cursor: pointer;
+    margin: 0.2rem;
+}

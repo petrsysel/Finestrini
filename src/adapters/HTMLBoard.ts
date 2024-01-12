@@ -95,6 +95,8 @@ export class HTMLBoard implements IBoardUI {
         mover.style.backgroundColor = Color.get(note.color).stroke
         innerContainer.appendChild(mover)
 
+        this.renderControls(note, innerContainer)
+
         const startWidth = this.pxToNumber(noteElement.style.width)
         const startHeight = this.pxToNumber(noteElement.style.height)
         this.moveElement(resizer,
@@ -146,6 +148,31 @@ export class HTMLBoard implements IBoardUI {
                 })
             }
         )
+    }
+
+    private renderControls(note: Note, element: HTMLElement){
+        const controlContainer = DOMHelper.createDiv()
+        controlContainer.classList.add('note-controls-container')
+
+        const editButton = DOMHelper.create('a') as HTMLAnchorElement
+        const editImage = DOMHelper.create('img') as HTMLImageElement
+        editImage.src = "/icons/edit30.png"
+        editButton.appendChild(editImage)
+        controlContainer.appendChild(editButton)
+
+        const colorButton = DOMHelper.create('a') as HTMLAnchorElement
+        const colorImage = DOMHelper.create('img') as HTMLImageElement
+        colorImage.src = "/icons/color30.png"
+        colorButton.appendChild(colorImage)
+        controlContainer.appendChild(colorButton)
+
+        const removeButton = DOMHelper.create('a') as HTMLAnchorElement
+        const removeImage = DOMHelper.create('img') as HTMLImageElement
+        removeImage.src = "/icons/remove30.png"
+        removeButton.appendChild(removeImage)
+        controlContainer.appendChild(removeButton)
+
+        element.appendChild(controlContainer)
     }
 
     private getTileWidth(boardWidth: number){

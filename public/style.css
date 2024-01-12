@@ -244,8 +244,10 @@ body{
     display: flex;
     flex-direction: column;
     position: absolute;
-    right: -30px;
+    /* right: -30px; */
+    right: 0px;
     top: 0;
+    /* z-index: 1000; */
 }
 .note:hover .note-controls-container{
     opacity: 1;

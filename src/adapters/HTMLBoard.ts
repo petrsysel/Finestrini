@@ -51,7 +51,6 @@ export class HTMLBoard implements IBoardUI {
         this.listenerLayer.classList.add('listener-layer')
         this.boardElement.appendChild(this.listenerLayer)
 
-        console.log(board.notes)
         board.notes.forEach(note => {
             this.renderNote(note, boardWidth)
         })
@@ -141,8 +140,6 @@ export class HTMLBoard implements IBoardUI {
                     width: note.rect.width,
                     height: note.rect.height
                 }
-                console.log(`x: ${newRect.x} y: ${newRect.y}`)
-                console.log(note.id)
                 this.emit('move-note-request', {
                     rect: newRect,
                     operatingNoteId: note.id

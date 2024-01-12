@@ -7,7 +7,7 @@ export class Workspace{
     constructor(){
         this.primitive = {
             boards: [],
-            width: 20
+            width: 45
         }
     }
 
@@ -52,8 +52,8 @@ export class Workspace{
             rect: {
                 width: 6,
                 height: 4,
-                x: x,
-                y: y
+                x: Math.floor(Math.random()*30),
+                y: Math.floor(Math.random()*15)
             }
         })
     }

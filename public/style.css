@@ -174,13 +174,61 @@ body{
     position: fixed;
     right: 2rem;
     bottom: 2rem;
+    scale: 0.8;
+    transition: scale 0.2s;
+}
+.add-note-button:hover{
+    scale: 1;
 }
 
 .board-container{
     height: 100vh;
     overflow-y: scroll;
+    overflow-x: hidden;
 }
 
 #html-board{
     height: 3000px;
+    position: relative;
+}
+
+.note{
+    position: absolute;
+}
+
+.inner-note{
+    position: relative;
+    width: 100%;
+    height: 100%;
+}
+.resizer{
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    width: 20px;
+    height: 20px;
+    cursor: nw-resize;
+    border-top-left-radius: 20px;
+    opacity: 0;
+    transition: opacity 0.2s;
+}
+.note:hover .resizer{
+    opacity: 1;
+}
+.mover{
+    position: absolute;
+    left: 50%;
+    top: 0;
+    width: 60px;
+    height: 20px;
+    cursor: move;
+    border-radius: 50% / 0 0 100% 100%;
+    /* border-bottom-left-radius: 50%;
+    border-bottom-right-radius: 50%; */
+    opacity: 0;
+    transition: opacity 0.2s;
+    transform: translate(-50%, 0);
+}
+.note:hover .mover{
+    opacity: 1;
 }

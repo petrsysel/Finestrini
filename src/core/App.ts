@@ -23,6 +23,10 @@ export class App{
         const initBoard = this.workspace.getSomeBoard()
         this.activeBoardId = initBoard.id
 
+        const renderBoard = () => {
+            board.render(this.workspace.getBoardById(this.activeBoardId)!, this.workspace.getWidth())
+        }
+
         controlPanel.on("rename-board-request", async data => {
             const newName = await inputDialogue.show()
             if(newName && newName.length != 0) this.workspace.renameBoard(this.activeBoardId, newName)
@@ -54,11 +58,26 @@ export class App{
 
         board.on("add-note-request", () => {
             this.workspace.createNote(this.activeBoardId, 1, 1)
-            board.render(this.workspace.getBoardById(this.activeBoardId)!, this.workspace.getWidth())
+            renderBoard()
+        })
+
+        board.on('board-resize-request', () => {
+            renderBoard()
+        })
+
+        board.on('move-note-request', data => {
+            if(!data) return
+            this.workspace.changeNotePosition(this.activeBoardId, data.operatingNoteId, data.rect.x, data.rect.y)
+            renderBoard()
+        })
+
+        board.on('change-note-size-request', data => {
+            if(!data) return
+            this.workspace.changeNoteRect(this.activeBoardId, data.operatingNoteId, data.rect)
+            renderBoard()
         })
 
         controlPanel.render(this.workspace.getBoardList(), this.activeBoardId)
-        board.render(this.workspace.getBoardById(this.activeBoardId)!, this.workspace.getWidth())
-        // board.render(initBoard)
+        renderBoard()
     }
 }

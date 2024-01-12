@@ -11,6 +11,7 @@ export class ConfirmDialogue implements IDialogueUI<boolean>{
     private yesButton: HTMLElement
     private noButton: HTMLElement
     private closeButton: HTMLElement
+    private dialogueLabel: HTMLElement
 
     constructor(){
         this.eventBehaviour = new EventBehaviour()
@@ -24,6 +25,7 @@ export class ConfirmDialogue implements IDialogueUI<boolean>{
         this.yesButton = DOMHelper.get("confirm-dialogue-yes-btn")
         this.noButton = DOMHelper.get("confirm-dialogue-no-btn")
         this.closeButton = DOMHelper.get("confirm-dialogue-close-btn")
+        this.dialogueLabel = DOMHelper.get("confirm-dialogue-label")
 
         this.hide()
     }
@@ -32,8 +34,10 @@ export class ConfirmDialogue implements IDialogueUI<boolean>{
         this.eventBehaviour.on(event, callback)
     }
 
-    show(): Promise<boolean | undefined> {
+    show(message: string): Promise<boolean | undefined> {
         this.windowElement.style.display = "block"
+        
+        if(message) this.dialogueLabel.innerHTML = message
 
         return new Promise((resolve, reject) => {
             this.yesButton.addEventListener("click", () => {

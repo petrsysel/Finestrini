@@ -76,8 +76,10 @@ export class App{
             this.workspace.changeNoteRect(this.activeBoardId, data.operatingNoteId, data.rect)
             renderBoard()
         })
-        board.on('remove-note-request', data => {
+        board.on('remove-note-request', async data => {
             if(!data) return
+            const confirmation = await confirmDialogue.show("Přeješ si odstranit tuto poznámku?")
+            if(!confirmation) return 
             this.workspace.removeNote(this.activeBoardId, data.operatingNoteId)
             renderBoard()
         })

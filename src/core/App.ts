@@ -83,6 +83,13 @@ export class App{
             this.workspace.removeNote(this.activeBoardId, data.operatingNoteId)
             renderBoard()
         })
+        board.on('change-note-color-request', async data => {
+            if(!data) return
+            const color = await colorDialogue.show()
+            if(!color) return
+            this.workspace.changeNoteColor(this.activeBoardId, data.operatingNoteId, color)
+            renderBoard()
+        })
 
         controlPanel.render(this.workspace.getBoardList(), this.activeBoardId)
         renderBoard()

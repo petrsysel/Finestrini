@@ -182,6 +182,13 @@ export class HTMLBoard implements IBoardUI {
             }
             this.emit('remove-note-request', data)
         })
+        colorButton.addEventListener('click', () => {
+            const data: BoardData = {
+                operatingNoteId: note.id,
+                rect: note.rect
+            }
+            this.emit('change-note-color-request', data)
+        })
     }
 
     private getTileWidth(boardWidth: number){

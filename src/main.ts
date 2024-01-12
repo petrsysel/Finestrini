@@ -1,3 +1,4 @@
+import { ColorDialogue } from "./adapters/ColorDialogue"
 import { ConfirmDialogue } from "./adapters/ConfirmDialogue"
 import { ControlPanel } from "./adapters/ControlPanel"
 import { HTMLBoard } from "./adapters/HTMLBoard"
@@ -15,8 +16,7 @@ function main(){
     const confirmDialogue = new ConfirmDialogue()
     const inputDialogue = new InputDialogue()
     const richTextDialogue = {} as IDialogueUI<string>
-    const colorDialogue = {} as IDialogueUI<NoteColor>
-    // const board = new KonvaBoard()
+    const colorDialogue = new ColorDialogue()
     const board = new HTMLBoard()
 
     const app = new App(

@@ -232,3 +232,8 @@ body{
 .note:hover .mover{
     opacity: 1;
 }
+
+.listener-layer{
+    width: 100%;
+    height: 100%;
+}

@@ -11,6 +11,8 @@ export class HTMLBoard implements IBoardUI {
     signal: EventBehaviour<BoardEvent, BoardData>
     addNoteButton: HTMLAnchorElement
 
+    listenerLayer: HTMLElement
+
     constructor(){
         this.signal = new EventBehaviour()
 
@@ -29,6 +31,8 @@ export class HTMLBoard implements IBoardUI {
         }).observe(this.boardElement)
 
         // DOMHelper.getBody().appendChild(this.boardElement)
+        this.listenerLayer = DOMHelper.createDiv()
+        this.boardElement.appendChild(this.listenerLayer)
     }
 
     on(event: BoardEvent, callback: (data: BoardData) => void): void {
@@ -42,6 +46,11 @@ export class HTMLBoard implements IBoardUI {
     render(board: Board, boardWidth: number): void {
         this.renderBackground(boardWidth)
         this.boardElement.innerHTML = ""
+
+        this.listenerLayer = DOMHelper.createDiv()
+        this.listenerLayer.classList.add('listener-layer')
+        this.boardElement.appendChild(this.listenerLayer)
+
         console.log(board.notes)
         board.notes.forEach(note => {
             this.renderNote(note, boardWidth)
@@ -112,7 +121,7 @@ export class HTMLBoard implements IBoardUI {
         )
 
 
-        this.boardElement.appendChild(noteElement);
+        this.listenerLayer.appendChild(noteElement);
 
         const startLeft = this.pxToNumber(noteElement.style.left)
         const startTop = this.pxToNumber(noteElement.style.top)
@@ -151,10 +160,11 @@ export class HTMLBoard implements IBoardUI {
         let startX = 0
         let startY = 0
 
-        // window.onmouseup = 
-        element.addEventListener('mouseup', function(e){
-            onDragEnd(e.clientX, e.clientY)
-        })
+        // const mouseupListener = 
+        // window.onmouseup = mouseupListener
+        this.listenerLayer.addEventListener('mouseup', function(e: MouseEvent){
+            onDragEnd(e.clientX - startX, e.clientY - startY)
+        }, false)
         
         element.onmousedown = function(e){
             startX = e.clientX

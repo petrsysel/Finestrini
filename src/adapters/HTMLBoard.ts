@@ -62,7 +62,7 @@ export class HTMLBoard implements IBoardUI {
     private renderBackground(width: number){
         const tileSize = this.getTileWidth(width)
 
-        this.boardElement.style.background = 'white'
+        this.boardElement.style.background = 'transparent'
         this.boardElement.style.backgroundImage = 'radial-gradient(black 1px, transparent 0)'
         this.boardElement.style.backgroundSize = `${tileSize}px ${tileSize}px`
     }

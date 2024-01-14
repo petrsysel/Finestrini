@@ -53,7 +53,10 @@ export class ControlPanel implements IControlPanelUI{
         const dropdownBoards = boards.filter(b => b.id !=activeBoardId)
 
         this.boardDropdownContent.innerHTML = ""
-        dropdownBoards.forEach(b => {
+        dropdownBoards.sort((a, b) => {
+            if(a.name.toLowerCase() > b.name.toLowerCase()) return 1
+            else return -1
+        }).forEach(b => {
             const boardSelect = document.createElement("p")
             boardSelect.innerHTML = b.name
             boardSelect.addEventListener("click", () => this.eventBehaviour.emit("change-board-request", {

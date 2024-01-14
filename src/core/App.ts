@@ -72,7 +72,10 @@ export class App{
 
         board.on('move-note-request', data => {
             if(!data) return
-            this.workspace.changeNotePosition(this.activeBoardId, data.operatingNoteId, data.rect.x, data.rect.y)
+            if(data.rect.y > 0){
+                this.workspace.changeNotePosition(this.activeBoardId, data.operatingNoteId, data.rect.x, data.rect.y)
+            }
+            
             renderBoard()
         })
 

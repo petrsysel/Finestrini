@@ -1,4 +1,4 @@
-import { BoardId, NoteColor, NoteId, NoteRect, WorkspacePrimitive } from "./WorkspaceTypes"
+import { BoardId, Note, NoteColor, NoteId, NoteRect, WorkspacePrimitive } from "./WorkspaceTypes"
 import { WorkspaceUtility } from "./WorkspaceUtility"
 
 export class Workspace{
@@ -48,7 +48,7 @@ export class Workspace{
         board.notes.push({
             id: crypto.randomUUID(),
             color: WorkspaceUtility.getRandomColor(),
-            content: "",
+            content: "{}",
             rect: {
                 width: 6,
                 height: 4,
@@ -108,5 +108,10 @@ export class Workspace{
     }
     getWidth(){
         return this.primitive.width
+    }
+    getNote(boardId: BoardId, noteId: NoteId): Note | undefined{
+        const board = this.primitive.boards.find(b => b.id == boardId)
+        if(!board) return undefined
+        return board.notes.find(n => n.id === noteId)
     }
 }

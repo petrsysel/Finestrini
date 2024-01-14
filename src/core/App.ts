@@ -37,10 +37,14 @@ export class App{
             
             this.activeBoardId = this.workspace.createBoard(name)
             controlPanel.render(this.workspace.getBoardList(), this.activeBoardId)
+
+            renderBoard()
         })
         controlPanel.on("change-board-request", data => {
             if(data) this.activeBoardId = data.activeBoard
             controlPanel.render(this.workspace.getBoardList(), this.activeBoardId)
+
+            renderBoard()
         })
         controlPanel.on("rename-board-request", async () => {
             const newName = await inputDialogue.show()
@@ -54,6 +58,7 @@ export class App{
                 this.activeBoardId = this.workspace.getSomeBoard().id
                 controlPanel.render(this.workspace.getBoardList(), this.activeBoardId)
             }
+            renderBoard()
         })
 
         board.on("add-note-request", () => {
@@ -88,6 +93,16 @@ export class App{
             const color = await colorDialogue.show()
             if(!color) return
             this.workspace.changeNoteColor(this.activeBoardId, data.operatingNoteId, color)
+            renderBoard()
+        })
+        board.on('change-note-content-request', async data => {
+            if(!data) return
+            const note = this.workspace.getNote(this.activeBoardId, data.operatingNoteId)!
+
+            const content = await richTextDialogue.show(note.content)
+            if(!content) return
+
+            this.workspace.changeNoteContent(this.activeBoardId, data.operatingNoteId, content)
             renderBoard()
         })
 

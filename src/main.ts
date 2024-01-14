@@ -4,6 +4,8 @@ import { ControlPanel } from "./adapters/ControlPanel"
 import { HTMLBoard } from "./adapters/HTMLBoard"
 import { InputDialogue } from "./adapters/InputDialogue"
 import { KonvaBoard } from "./adapters/Konva/KonvaBoard"
+import { QuillContentParser } from "./adapters/QuillContentParser"
+import { QuillEditor } from "./adapters/QuillEditor"
 import { App } from "./core/App"
 import { NoteColor } from "./core/WorkspaceTypes"
 import { IDialogueUI } from "./ports/IDialogueUI"
@@ -15,9 +17,10 @@ function main(){
     const controlPanel = new ControlPanel()
     const confirmDialogue = new ConfirmDialogue()
     const inputDialogue = new InputDialogue()
-    const richTextDialogue = {} as IDialogueUI<string>
+    const richTextDialogue = new QuillEditor()
     const colorDialogue = new ColorDialogue()
-    const board = new HTMLBoard()
+    const contentParser = new QuillContentParser()
+    const board = new HTMLBoard(contentParser)
 
     const app = new App(
         localStorage,

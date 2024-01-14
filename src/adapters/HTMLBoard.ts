@@ -1,5 +1,6 @@
 import { Board, Note, NoteRect } from "../core/WorkspaceTypes";
 import { BoardData, BoardEvent, IBoardUI } from "../ports/IBoardUI";
+import { IContentParser } from "../ports/IContentParser";
 import { AjaxLoader } from "../utility/AjaxLoader";
 import { Color } from "../utility/Color";
 import { DOMHelper } from "../utility/DOMHelper";
@@ -10,10 +11,12 @@ export class HTMLBoard implements IBoardUI {
     boardContainer: HTMLElement
     signal: EventBehaviour<BoardEvent, BoardData>
     addNoteButton: HTMLAnchorElement
+    noteContentParser: IContentParser
 
     listenerLayer: HTMLElement
 
-    constructor(){
+    constructor(noteContentParser: IContentParser){
+        this.noteContentParser = noteContentParser
         this.signal = new EventBehaviour()
 
         this.boardContainer = DOMHelper.createDiv()
@@ -66,6 +69,7 @@ export class HTMLBoard implements IBoardUI {
 
     private renderNote(note: Note, boardWidth: number){
         const noteElement = DOMHelper.create('div')
+        
         noteElement.classList.add('note')
 
         const tileWidth = this.getTileWidth(boardWidth)
@@ -82,6 +86,13 @@ export class HTMLBoard implements IBoardUI {
         noteElement.style.border = `3px solid ${borderColor}`
 
         const innerContainer = DOMHelper.createDiv()
+        const contentHolder = DOMHelper.createDiv()
+        const content = JSON.parse(note.content)
+        contentHolder.innerHTML = this.noteContentParser.parse(JSON.stringify(content))
+        
+        contentHolder.classList.add('note-content-holder')
+        innerContainer.appendChild(contentHolder)
+
         innerContainer.classList.add('inner-note')
         noteElement.appendChild(innerContainer)
 
@@ -120,7 +131,6 @@ export class HTMLBoard implements IBoardUI {
                 })
             }
         )
-
 
         this.listenerLayer.appendChild(noteElement);
 
@@ -188,6 +198,13 @@ export class HTMLBoard implements IBoardUI {
                 rect: note.rect
             }
             this.emit('change-note-color-request', data)
+        })
+        editButton.addEventListener('click', () => {
+            const data: BoardData = {
+                operatingNoteId: note.id,
+                rect: note.rect
+            }
+            this.emit('change-note-content-request', data)
         })
     }
 

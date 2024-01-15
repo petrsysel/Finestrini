@@ -172,7 +172,7 @@ export class HTMLBoard implements IBoardUI {
 
         const colorButton = DOMHelper.create('a') as HTMLAnchorElement
         const colorImage = DOMHelper.create('img') as HTMLImageElement
-        colorImage.src = "/icons/color30.png"
+        colorImage.src = "/icons/fillcolor30.png"
         colorButton.appendChild(colorImage)
         controlContainer.appendChild(colorButton)
 

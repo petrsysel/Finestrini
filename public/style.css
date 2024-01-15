@@ -249,9 +249,11 @@ body{
     /* right: 0px; */
     top: 0;
     z-index: 1;
+    display: none;
 }
 .note:hover .note-controls-container{
     opacity: 1;
+    display: flex;
 }
 .note-controls-container img{
     width: 20px;

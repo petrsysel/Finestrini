@@ -166,19 +166,28 @@ export class HTMLBoard implements IBoardUI {
 
         const editButton = DOMHelper.create('a') as HTMLAnchorElement
         const editImage = DOMHelper.create('img') as HTMLImageElement
-        editImage.src = "/icons/edit30.png"
+        editImage.style.backgroundColor = Color.get(note.color).fill
+        editImage.style.borderRadius = '100px'
+        editImage.style.border = `3px solid ${Color.get(note.color).stroke}`
+        editImage.src = "/icons/edit100.png"
         editButton.appendChild(editImage)
         controlContainer.appendChild(editButton)
 
         const colorButton = DOMHelper.create('a') as HTMLAnchorElement
         const colorImage = DOMHelper.create('img') as HTMLImageElement
-        colorImage.src = "/icons/fillcolor30.png"
+        colorImage.style.backgroundColor = Color.get(note.color).fill
+        colorImage.style.borderRadius = '100px'
+        colorImage.style.border = `3px solid ${Color.get(note.color).stroke}`
+        colorImage.src = "/icons/colorpicker100.png"
         colorButton.appendChild(colorImage)
         controlContainer.appendChild(colorButton)
 
         const removeButton = DOMHelper.create('a') as HTMLAnchorElement
         const removeImage = DOMHelper.create('img') as HTMLImageElement
-        removeImage.src = "/icons/remove30.png"
+        removeImage.style.backgroundColor = Color.get(note.color).fill
+        removeImage.style.borderRadius = '100px'
+        removeImage.style.border = `3px solid ${Color.get(note.color).stroke}`
+        removeImage.src = "/icons/remove100.png"
         removeButton.appendChild(removeImage)
         controlContainer.appendChild(removeButton)
 

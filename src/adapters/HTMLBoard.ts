@@ -68,15 +68,18 @@ export class HTMLBoard implements IBoardUI {
         })
     }
 
+    private getScrollY(){
+        return document.getElementsByClassName('board-container')[0].scrollTop
+    }
+
     private updateAddButton(boardWidth: number){
         const tile = this.getTileWidth(boardWidth)
-        // console.log(this.boardContainer.scrollTop)
+        
         this.addNoteButton.onmousedown = () => {
-            console.log("emmiting")
             this.emit('add-note-request', {
                 rect:{
                     x:boardWidth/2- 5,
-                    y: this.boardContainer.scrollTop/tile + 2,
+                    y: this.getScrollY()/tile + (innerHeight/2)/tile - 5,
                     height:5,
                     width:10
                 },

@@ -24,7 +24,7 @@ export class App{
         this.activeBoardId = initBoard.id
 
         const renderBoard = (calledBy: string) => {
-            console.log(`Rendering... Called by: ${calledBy}`)
+            // console.log(`Rendering... Called by: ${calledBy}`)
             board.render(this.workspace.getBoardById(this.activeBoardId)!, this.workspace.getWidth())
         }
 
@@ -64,7 +64,6 @@ export class App{
 
         board.on("add-note-request", data => {
             if(!data) return
-            console.log("adding")
             this.workspace.createNote(this.activeBoardId, data.rect.x, data.rect.y)
             renderBoard("add-note-request")
         })

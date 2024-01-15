@@ -15,7 +15,7 @@ body{
     flex-direction: column;
     height: 100vh;
     overflow: hidden;
-    background-color: rgb(249, 252, 251);
+    background-color: white;
 }
 
 .control-panel{
@@ -66,6 +66,11 @@ body{
 .img-btn{
     height: 2rem;
     margin: 0 0.2rem;
+    border-radius: 100px;
+    border: 3px solid var(--dark-main-color);
+}
+.img-btn:hover{
+    border-style: dashed;
 }
 
 .board-dropdown{
@@ -145,12 +150,16 @@ body{
     height: 10rem;
 }
 .dialogue-header{
-    background-color: var(--dark-main-color);
+    background-color: var(--light-main-color);
+    color: var(--dark-main-color);
     flex: 1;
     display: flex;
     align-items: center;
     justify-content: space-between;
     padding: 0 0.5rem;
+
+    border-radius: 1rem 1rem 0 0;
+    border: 3px solid var(--dark-main-color);
 }
 .dialogue-body{
     background-color: var(--light-main-color);
@@ -158,6 +167,8 @@ body{
     display: flex;
     align-items: center;
     justify-content: center;
+    border-right: 3px solid var(--dark-main-color);
+    border-left: 3px solid var(--dark-main-color);
 }
 .user-input {
     width: 100%;
@@ -165,11 +176,14 @@ body{
     height: 1.5rem;
 }
 .dialogue-footer{
-    background-color: var(--dark-main-color);
+    background-color: var(--light-main-color);
     flex: 1;
     display: flex;
     align-items: center;
     justify-content: space-around;
+
+    border-radius: 0 0 1rem 1rem;
+    border: 3px solid var(--dark-main-color);
 }
 .btn{
     width: 4rem;
@@ -320,6 +334,9 @@ body{
     top: 50%;
 }
 .editor-body{
+    border-radius: 0 0 1rem 1rem;
+}
+.editor-body{
     display: block;
     overflow-y: scroll;
     /* position: fixed;
@@ -343,3 +360,28 @@ body{
 .note-content-holder li{
     margin-left: 2rem;
 }
+
+.ql-editor{
+    background-color: white;
+}
+
+::-webkit-scrollbar {
+    width: 3px;
+}
+/* ::-webkit-scrollbar:hover{
+    width: 10px;
+} */
+
+::-webkit-scrollbar-track {
+    /* background: #f1f1f1; */
+    background-color: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+    background: rgb(77, 77, 77);
+    border-radius: 100px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: rgb(77, 77, 77);   
+} 

@@ -14,6 +14,8 @@ export class ControlPanel implements IControlPanelUI{
     private renameBoardBtn: HTMLElement
     private removeBoardBtn: HTMLElement
 
+    private toggleFullscreenBtn: HTMLElement
+
     constructor(){
         this.eventBehaviour = new EventBehaviour()
         this.element = document.createElement('div')
@@ -36,6 +38,15 @@ export class ControlPanel implements IControlPanelUI{
         this.removeBoardBtn = DOMHelper.get("remove-board-btn")
         this.removeBoardBtn.addEventListener("click", () => {
             this.emit("remove-board-request", null)
+        })
+
+        this.toggleFullscreenBtn = DOMHelper.get('toggle-fullscreen')
+        this.toggleFullscreenBtn.addEventListener('click', () => {
+            if(document.fullscreenElement) document.exitFullscreen()
+            else{
+                const doc = document.documentElement
+                doc.requestFullscreen()
+            }
         })
     }
 

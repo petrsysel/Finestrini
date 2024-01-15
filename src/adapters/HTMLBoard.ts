@@ -25,9 +25,17 @@ export class HTMLBoard implements IBoardUI {
 
         this.boardElement = document.getElementById('html-board') as HTMLElement
         this.addNoteButton = DOMHelper.get('add-note-button') as HTMLAnchorElement
-        this.addNoteButton.addEventListener('click', () => {
-            this.emit('add-note-request', null)
-        })
+        // this.addNoteButton. onmouseup = () => {
+        //     this.emit('add-note-request', {
+        //         rect:{
+        //             x:1,
+        //             y:1,
+        //             height:5,
+        //             width:10
+        //         },
+        //         operatingNoteId: "---"
+        //     })
+        // }
 
         new ResizeObserver(() => {
             this.emit('board-resize-request', null)
@@ -49,7 +57,8 @@ export class HTMLBoard implements IBoardUI {
     render(board: Board, boardWidth: number): void {
         this.renderBackground(boardWidth)
         this.boardElement.innerHTML = ""
-
+        // console.log("rendering")
+        this.updateAddButton(boardWidth)
         this.listenerLayer = DOMHelper.createDiv()
         this.listenerLayer.classList.add('listener-layer')
         this.boardElement.appendChild(this.listenerLayer)
@@ -57,6 +66,23 @@ export class HTMLBoard implements IBoardUI {
         board.notes.forEach(note => {
             this.renderNote(note, boardWidth)
         })
+    }
+
+    private updateAddButton(boardWidth: number){
+        const tile = this.getTileWidth(boardWidth)
+        // console.log(this.boardContainer.scrollTop)
+        this.addNoteButton.onmousedown = () => {
+            console.log("emmiting")
+            this.emit('add-note-request', {
+                rect:{
+                    x:boardWidth/2- 5,
+                    y: this.boardContainer.scrollTop/tile + 2,
+                    height:5,
+                    width:10
+                },
+                operatingNoteId: "---"
+            })
+        }
     }
 
     private renderBackground(width: number){
@@ -107,6 +133,14 @@ export class HTMLBoard implements IBoardUI {
         innerContainer.appendChild(mover)
 
         this.renderControls(note, innerContainer)
+
+        ;(noteElement as HTMLElement).addEventListener('dblclick', () => {
+            const data: BoardData = {
+                operatingNoteId: note.id,
+                rect: note.rect
+            }
+            this.emit('change-note-content-request', data)
+        })
 
         const startWidth = this.pxToNumber(noteElement.style.width)
         const startHeight = this.pxToNumber(noteElement.style.height)
@@ -226,15 +260,20 @@ export class HTMLBoard implements IBoardUI {
         let startX = 0
         let startY = 0
 
+        let dragStart = false
+
         // const mouseupListener = 
         // window.onmouseup = mouseupListener
         this.listenerLayer.addEventListener('mouseup', function(e: MouseEvent){
+            if(dragStart) dragStart = false
+            else return
             onDragEnd(e.clientX - startX, e.clientY - startY)
         }, false)
         
         element.onmousedown = function(e){
             startX = e.clientX
             startY = e.clientY
+            dragStart = true
 
             window.onmousemove = function(emove){
                 onMove(emove.clientX - startX, emove.clientY - startY)

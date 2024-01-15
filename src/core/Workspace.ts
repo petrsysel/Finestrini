@@ -50,10 +50,10 @@ export class Workspace{
             color: WorkspaceUtility.getRandomColor(),
             content: "{}",
             rect: {
-                width: 6,
-                height: 4,
-                x: Math.floor(Math.random()*30),
-                y: Math.floor(Math.random()*15)
+                width: 10,
+                height: 5,
+                x: x,
+                y: y
             }
         })
     }

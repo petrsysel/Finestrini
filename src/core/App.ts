@@ -23,7 +23,8 @@ export class App{
         const initBoard = this.workspace.getSomeBoard()
         this.activeBoardId = initBoard.id
 
-        const renderBoard = () => {
+        const renderBoard = (calledBy: string) => {
+            console.log(`Rendering... Called by: ${calledBy}`)
             board.render(this.workspace.getBoardById(this.activeBoardId)!, this.workspace.getWidth())
         }
 
@@ -38,13 +39,13 @@ export class App{
             this.activeBoardId = this.workspace.createBoard(name)
             controlPanel.render(this.workspace.getBoardList(), this.activeBoardId)
 
-            renderBoard()
+            renderBoard("add-board-request")
         })
         controlPanel.on("change-board-request", data => {
             if(data) this.activeBoardId = data.activeBoard
             controlPanel.render(this.workspace.getBoardList(), this.activeBoardId)
 
-            renderBoard()
+            renderBoard("change-board-request")
         })
         controlPanel.on("rename-board-request", async () => {
             const newName = await inputDialogue.show()
@@ -58,45 +59,52 @@ export class App{
                 this.activeBoardId = this.workspace.getSomeBoard().id
                 controlPanel.render(this.workspace.getBoardList(), this.activeBoardId)
             }
-            renderBoard()
+            renderBoard("remove-board-request")
         })
 
-        board.on("add-note-request", () => {
-            this.workspace.createNote(this.activeBoardId, 1, 1)
-            renderBoard()
+        board.on("add-note-request", data => {
+            if(!data) return
+            console.log("adding")
+            this.workspace.createNote(this.activeBoardId, data.rect.x, data.rect.y)
+            renderBoard("add-note-request")
         })
 
         board.on('board-resize-request', () => {
-            renderBoard()
+            renderBoard('board-resize-request')
         })
 
         board.on('move-note-request', data => {
             if(!data) return
+
+            // UDĚLAT LÉPE!
             if(data.rect.y > 0){
                 this.workspace.changeNotePosition(this.activeBoardId, data.operatingNoteId, data.rect.x, data.rect.y)
             }
+            else{
+                this.workspace.changeNotePosition(this.activeBoardId, data.operatingNoteId, data.rect.x, 1)
+            }
             
-            renderBoard()
+            renderBoard('move-note-request')
         })
 
         board.on('change-note-size-request', data => {
             if(!data) return
             this.workspace.changeNoteRect(this.activeBoardId, data.operatingNoteId, data.rect)
-            renderBoard()
+            renderBoard('change-note-size-request')
         })
         board.on('remove-note-request', async data => {
             if(!data) return
             const confirmation = await confirmDialogue.show("Přeješ si odstranit tuto poznámku?")
             if(!confirmation) return 
             this.workspace.removeNote(this.activeBoardId, data.operatingNoteId)
-            renderBoard()
+            renderBoard('remove-note-request')
         })
         board.on('change-note-color-request', async data => {
             if(!data) return
             const color = await colorDialogue.show()
             if(!color) return
             this.workspace.changeNoteColor(this.activeBoardId, data.operatingNoteId, color)
-            renderBoard()
+            renderBoard('change-note-color-request')
         })
         board.on('change-note-content-request', async data => {
             if(!data) return
@@ -106,10 +114,10 @@ export class App{
             if(!content) return
 
             this.workspace.changeNoteContent(this.activeBoardId, data.operatingNoteId, content)
-            renderBoard()
+            renderBoard('change-note-content-request')
         })
 
         controlPanel.render(this.workspace.getBoardList(), this.activeBoardId)
-        renderBoard()
+        renderBoard("init render")
     }
 }

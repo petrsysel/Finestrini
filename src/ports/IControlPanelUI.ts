@@ -8,5 +8,5 @@ export type ControlPanelData = {
 
 export interface IControlPanelUI{
     on(event: ControlPanelEvent, callback: (data: ControlPanelData) => void): void
-    render(boards: Board[], activeBoardId: BoardId): void
+    render(boards: Board[], activeBoardId: BoardId, lastSave: string): void
 }

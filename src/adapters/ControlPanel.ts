@@ -19,6 +19,8 @@ export class ControlPanel implements IControlPanelUI{
     private importBtn: HTMLElement
     private helpBtn: HTMLElement
 
+    private autosaveLabel: HTMLParagraphElement
+
     constructor(){
         this.eventBehaviour = new EventBehaviour()
         this.element = document.createElement('div')
@@ -64,6 +66,8 @@ export class ControlPanel implements IControlPanelUI{
         this.helpBtn.addEventListener('click', () => {
             this.emit('help-request', null)
         })
+
+        this.autosaveLabel = DOMHelper.get('autosave-label') as HTMLParagraphElement
     }
 
     on(event: ControlPanelEvent, callback: (data: ControlPanelData) => void): void {
@@ -74,7 +78,9 @@ export class ControlPanel implements IControlPanelUI{
         this.eventBehaviour.emit(event, data)
     }
 
-    render(boards: Board[], activeBoardId: BoardId): void {
+    render(boards: Board[], activeBoardId: BoardId, lastSave: string): void {
+        this.autosaveLabel.innerHTML = `Naposledy uloženo ${lastSave}`
+
         const board = boards.find(b => b.id == activeBoardId)
         if(!board) return
         const dropdownBoards = boards.filter(b => b.id !=activeBoardId)

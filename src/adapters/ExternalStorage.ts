@@ -48,4 +48,8 @@ export class ExternalStorage implements IWorkspaceRepository{
             resolve()
         })
     }
+    
+    lastSave(): string {
+        return "unresolved"
+    }
 }

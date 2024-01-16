@@ -5,6 +5,7 @@ import { ExternalStorage } from "./adapters/ExternalStorage"
 import { HTMLBoard } from "./adapters/HTMLBoard"
 import { InputDialogue } from "./adapters/InputDialogue"
 import { KonvaBoard } from "./adapters/Konva/KonvaBoard"
+import { LocalStorage } from "./adapters/LocalStorage"
 import { QuillContentParser } from "./adapters/QuillContentParser"
 import { QuillEditor } from "./adapters/QuillEditor"
 import { App } from "./core/App"
@@ -13,7 +14,7 @@ import { IDialogueUI } from "./ports/IDialogueUI"
 import { IWorkspaceRepository } from "./ports/IWorkspaceRepository"
 
 function main(){
-    const localStorage = {} as IWorkspaceRepository
+    const localStorage = new LocalStorage()
     const externalStorage = new ExternalStorage()
     const controlPanel = new ControlPanel()
     const confirmDialogue = new ConfirmDialogue()

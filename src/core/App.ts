@@ -25,7 +25,9 @@ export class App{
 
         const renderBoard = (calledBy: string) => {
             // console.log(`Rendering... Called by: ${calledBy}`)
+            controlPanel.render(this.workspace.getBoardList(), this.activeBoardId, localStorage.lastSave())
             board.render(this.workspace.getBoardById(this.activeBoardId)!, this.workspace.getWidth())
+            localStorage.save(this.workspace.getPrimitive())
         }
 
         controlPanel.on("rename-board-request", async data => {
@@ -37,27 +39,25 @@ export class App{
             if(!name || name.length == 0) return
             
             this.activeBoardId = this.workspace.createBoard(name)
-            controlPanel.render(this.workspace.getBoardList(), this.activeBoardId)
-
+            
             renderBoard("add-board-request")
         })
         controlPanel.on("change-board-request", data => {
             if(data) this.activeBoardId = data.activeBoard
-            controlPanel.render(this.workspace.getBoardList(), this.activeBoardId)
 
             renderBoard("change-board-request")
         })
         controlPanel.on("rename-board-request", async () => {
             const newName = await inputDialogue.show()
             if(newName) this.workspace.renameBoard(this.activeBoardId, newName)
-            controlPanel.render(this.workspace.getBoardList(), this.activeBoardId)
+            
+            renderBoard("rename-board-request")
         })
         controlPanel.on("remove-board-request", async () => {
             const confirmation = await confirmDialogue.show()
             if(confirmation){
                 this.workspace.removeBoard(this.activeBoardId)
                 this.activeBoardId = this.workspace.getSomeBoard().id
-                controlPanel.render(this.workspace.getBoardList(), this.activeBoardId)
             }
             renderBoard("remove-board-request")
         })
@@ -124,7 +124,6 @@ export class App{
                 const loadedWorkspace = await externalStorage.load()
                 this.workspace.changeWorkspace(loadedWorkspace)
                 this.activeBoardId = this.workspace.getSomeBoard().id
-                controlPanel.render(this.workspace.getBoardList(), this.activeBoardId)
                 renderBoard('import-request')
             }
             catch(e){
@@ -132,7 +131,16 @@ export class App{
             }
         })
 
-        controlPanel.render(this.workspace.getBoardList(), this.activeBoardId)
-        renderBoard("init render")
+        localStorage.load().then(loadedWorkspace => {
+            console.log("loaded")
+            console.log(loadedWorkspace)
+            this.workspace.changeWorkspace(loadedWorkspace)
+            this.activeBoardId = this.workspace.getSomeBoard().id
+        }).catch(reason => {
+            console.log(reason)
+        }).finally(() => {
+            renderBoard("init render")
+        })
+        
     }
 }

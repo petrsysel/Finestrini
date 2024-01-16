@@ -63,9 +63,21 @@ export class HTMLBoard implements IBoardUI {
         this.listenerLayer.classList.add('listener-layer')
         this.boardElement.appendChild(this.listenerLayer)
 
+        const tile = this.getTileWidth(boardWidth)
+
         board.notes.forEach(note => {
             this.renderNote(note, boardWidth)
+
+            if((note.rect.y + note.rect.height)*tile > this.pxToNumber(this.boardElement.style.height) - 25*tile){
+                this.increaseHeight()
+            }
         })
+        
+    }
+
+    private increaseHeight(){
+        const height = this.pxToNumber(this.boardElement.style.height)
+        this.boardElement.style.height = `${height + 1000}px`
     }
 
     private getScrollY(){

@@ -333,7 +333,7 @@ body{
 }
 .big-window{
     width: 90%;
-    height: 30rem;
+    height: 90%;
     top: 50%;
 }
 .editor-body{
@@ -341,15 +341,20 @@ body{
 }
 .editor-body{
     display: block;
-    overflow-y: scroll;
+    overflow-y: hidden;
+    position: relative;
+    /* height: 100%; */
     /* position: fixed;
     top: 0;
     left: 0; */
 }
-#toolbar{
-    /* width: 100%; */
-    /* height: 2rem; */
-}
+/* .ql-toolbar{
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 1000;
+    width: 100%;
+} */
 
 .note-content-holder{
     position: absolute;

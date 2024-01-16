@@ -114,4 +114,8 @@ export class Workspace{
         if(!board) return undefined
         return board.notes.find(n => n.id === noteId)
     }
+
+    changeWorkspace(workspace: WorkspacePrimitive){
+        this.primitive = workspace
+    }
 }

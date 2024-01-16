@@ -116,6 +116,22 @@ export class App{
             renderBoard('change-note-content-request')
         })
 
+        controlPanel.on('export-request', () => {
+            externalStorage.save(this.workspace.getPrimitive())
+        })
+        controlPanel.on('import-request', async () => {
+            try{
+                const loadedWorkspace = await externalStorage.load()
+                this.workspace.changeWorkspace(loadedWorkspace)
+                this.activeBoardId = this.workspace.getSomeBoard().id
+                controlPanel.render(this.workspace.getBoardList(), this.activeBoardId)
+                renderBoard('import-request')
+            }
+            catch(e){
+                console.log(e)
+            }
+        })
+
         controlPanel.render(this.workspace.getBoardList(), this.activeBoardId)
         renderBoard("init render")
     }

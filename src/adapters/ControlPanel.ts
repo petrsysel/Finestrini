@@ -15,6 +15,9 @@ export class ControlPanel implements IControlPanelUI{
     private removeBoardBtn: HTMLElement
 
     private toggleFullscreenBtn: HTMLElement
+    private exportBtn: HTMLElement
+    private importBtn: HTMLElement
+    private helpBtn: HTMLElement
 
     constructor(){
         this.eventBehaviour = new EventBehaviour()
@@ -47,6 +50,19 @@ export class ControlPanel implements IControlPanelUI{
                 const doc = document.documentElement
                 doc.requestFullscreen()
             }
+        })
+
+        this.exportBtn = DOMHelper.get('export-btn')
+        this.exportBtn.addEventListener('click', () => {
+            this.emit('export-request', null)
+        })
+        this.importBtn = DOMHelper.get('import-btn')
+        this.importBtn.addEventListener('click', () => {
+            this.emit('import-request', null)
+        })
+        this.helpBtn = DOMHelper.get('show-help-btn')
+        this.helpBtn.addEventListener('click', () => {
+            this.emit('help-request', null)
         })
     }
 

@@ -130,6 +130,10 @@ export class App{
                 console.log(e)
             }
         })
+        controlPanel.on('help-request', () => {
+            this.activeBoardId = this.workspace.loadHelp()
+            renderBoard('help-request')
+        })
 
         localStorage.load().then(loadedWorkspace => {
             console.log("loaded")

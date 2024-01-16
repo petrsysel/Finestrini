@@ -1,4 +1,5 @@
-import { BoardId, Note, NoteColor, NoteId, NoteRect, WorkspacePrimitive } from "./WorkspaceTypes"
+import { AjaxLoader } from "../utility/AjaxLoader"
+import { Board, BoardId, Note, NoteColor, NoteId, NoteRect, WorkspacePrimitive } from "./WorkspaceTypes"
 import { WorkspaceUtility } from "./WorkspaceUtility"
 
 export class Workspace{
@@ -117,5 +118,12 @@ export class Workspace{
 
     changeWorkspace(workspace: WorkspacePrimitive){
         this.primitive = workspace
+    }
+    loadHelp(): BoardId{
+        const helpBoardString = AjaxLoader.load('/templates/help.json')
+        const board: Board = JSON.parse(helpBoardString)
+        board.id = crypto.randomUUID()
+        this.primitive.boards.push(board)
+        return board.id
     }
 }

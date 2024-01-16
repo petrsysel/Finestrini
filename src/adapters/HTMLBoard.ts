@@ -218,7 +218,7 @@ export class HTMLBoard implements IBoardUI {
         editImage.style.backgroundColor = Color.get(note.color).fill
         editImage.style.borderRadius = '100px'
         editImage.style.border = `3px solid ${Color.get(note.color).stroke}`
-        editImage.src = "/icons/edit100.png"
+        editImage.src = "./icons/edit100.png"
         editButton.appendChild(editImage)
         controlContainer.appendChild(editButton)
 
@@ -227,7 +227,7 @@ export class HTMLBoard implements IBoardUI {
         colorImage.style.backgroundColor = Color.get(note.color).fill
         colorImage.style.borderRadius = '100px'
         colorImage.style.border = `3px solid ${Color.get(note.color).stroke}`
-        colorImage.src = "/icons/colorpicker100.png"
+        colorImage.src = "./icons/colorpicker100.png"
         colorButton.appendChild(colorImage)
         controlContainer.appendChild(colorButton)
 
@@ -236,7 +236,7 @@ export class HTMLBoard implements IBoardUI {
         removeImage.style.backgroundColor = Color.get(note.color).fill
         removeImage.style.borderRadius = '100px'
         removeImage.style.border = `3px solid ${Color.get(note.color).stroke}`
-        removeImage.src = "/icons/remove100.png"
+        removeImage.src = "./icons/remove100.png"
         removeButton.appendChild(removeImage)
         controlContainer.appendChild(removeButton)
 

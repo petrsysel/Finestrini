@@ -120,7 +120,7 @@ export class Workspace{
         this.primitive = workspace
     }
     loadHelp(): BoardId{
-        const helpBoardString = AjaxLoader.load('/templates/help.json')
+        const helpBoardString = AjaxLoader.load('./templates/help.json')
         const board: Board = JSON.parse(helpBoardString)
         board.id = crypto.randomUUID()
         this.primitive.boards.push(board)

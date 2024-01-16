@@ -1,6 +1,6 @@
 # Finestrini
 Finestrini je klientská webová aplikace pro rychlé psaní a grafickou organizaci poznámek.
-
+Aplikaci naleznete [zde](https://kraken.pedf.cuni.cz/~syselpet/finestrini/).
 
 ## Funkční specifikace
 Uživatel má k dispozici Finestrini workspace, který je ukládán do místního úložiště prohlížeče. Z tohoto vyplývá, že aplikace má pouze jednu uživatelskou roli - Uživatel.
